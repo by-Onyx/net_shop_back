@@ -20,8 +20,10 @@ public class DefaultFileUploadService : IFileUploadService
             throw new IOException("no bytes ;/");
         }
         
-        var fileName = Path.GetFileName(file.FileName);
-
+        var fileName = Path.GetFileNameWithoutExtension(file.FileName) + "_" + 
+                       DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss") + 
+                       Path.GetExtension(file.FileName);
+    
         var filePath = Path.Combine(_uploadPath, fileName);
 
         Directory.CreateDirectory(_uploadPath);
@@ -50,7 +52,8 @@ public class DefaultFileUploadService : IFileUploadService
     {
         var filePath = Path.Combine(_uploadPath, fileName);
 
-        if (!File.Exists(filePath)) throw new IOException("no file ;/");
+        if (!File.Exists(filePath)) 
+            throw new IOException("no file ;/");
         File.Delete(filePath);
         return Task.CompletedTask;
     }

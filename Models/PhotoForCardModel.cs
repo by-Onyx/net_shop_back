@@ -2,5 +2,6 @@
 
 public class PhotoForCardModel
 {
+    public required long Id { get; set; }
     public required string Link { get; set; }
 }

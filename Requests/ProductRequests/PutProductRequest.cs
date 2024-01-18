@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using net_shop_back.Models;
 using net_shop_back.Responses.ProductResponses;
 
 namespace net_shop_back.Requests.ProductRequests;
@@ -12,4 +13,6 @@ public record PutProductRequest : IRequest<PutProductResponse>
     public required string ShortDescription { get; set; }
     public bool? IsAvailable { get; set; } = false;
     public int? Count { get; set; } = 0;
+    public required List<PhotoForCardModel> Photos { get; set; }
+    public required List<DescriptionForCardModel> ProductDescriptions { get; set; }
 }
