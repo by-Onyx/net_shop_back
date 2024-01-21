@@ -11,6 +11,12 @@ namespace net_shop_back.Services.Implementations;
 [DefaultService]
 public class DefaultMailService : IMailService
 {
+    private readonly IConfiguration _config;
+
+    public DefaultMailService(IConfiguration config)
+    {
+        _config = config;
+    }
     /*private readonly ICustomersService _customersService;
 
     public DefaultMailService(ICustomersService customersService)

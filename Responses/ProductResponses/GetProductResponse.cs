@@ -4,5 +4,5 @@ namespace net_shop_back.Responses.ProductResponses;
 
 public record GetProductResponse
 {
-    public required ProductModel Product { get; set; }
+    public required ProductModelWithPhoto Product { get; set; }
 }
