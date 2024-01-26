@@ -38,7 +38,7 @@ public class DefaultMailService : IMailService
         {
             StringBuilder body = new StringBuilder();
         
-            SmtpClient mySmtpClient = new SmtpClient("smtp.mail.ru", 587);
+            SmtpClient mySmtpClient = new SmtpClient("smtp.mail.ru", 25);
 
             mySmtpClient.UseDefaultCredentials = false;
             mySmtpClient.EnableSsl = true;
