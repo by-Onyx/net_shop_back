@@ -21,7 +21,7 @@ public class DefaultFileUploadService : IFileUploadService
         }
         
         var fileName = Path.GetFileNameWithoutExtension(file.FileName) + "_" + 
-                       DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss") + 
+                       DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss-ffff") + 
                        Path.GetExtension(file.FileName);
     
         var filePath = Path.Combine(_uploadPath, fileName);
