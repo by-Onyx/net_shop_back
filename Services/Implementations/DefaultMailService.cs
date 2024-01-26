@@ -38,13 +38,13 @@ public class DefaultMailService : IMailService
         {
             StringBuilder body = new StringBuilder();
         
-            SmtpClient mySmtpClient = new SmtpClient("smtp.gmail.com", 587);
+            SmtpClient mySmtpClient = new SmtpClient("smtp.mail.ru", 587);
 
             mySmtpClient.UseDefaultCredentials = false;
             mySmtpClient.EnableSsl = true;
-            mySmtpClient.Credentials = new NetworkCredential("ilyayaldinov@gmail.com", "kkdg ucnn brlb egnd");
+            mySmtpClient.Credentials = new NetworkCredential("ilyayaldinov@inbox.ru", "RvSXC4wkVdunpmqkQE89");
 
-            MailAddress from = new MailAddress("ilyayaldinov@gmail.com", "www.constrspb.ru");
+            MailAddress from = new MailAddress("ilyayaldinov@inbox.ru", "www.constrspb.ru");
             MailAddress to = new MailAddress("ilyayaldinov@inbox.ru");
             MailMessage myMail = new MailMessage(from, to);
 

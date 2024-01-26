@@ -12,3 +12,4 @@ services:
       - "../photos:/photos/"
     ports:
       - "12344:12344"
+      - "587:587"
