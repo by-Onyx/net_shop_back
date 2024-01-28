@@ -10,12 +10,12 @@ namespace net_shop_back.Handlers.GroupHandlers;
 public class GetAllGroupSubgroupsHandler : IRequestHandler<GetAllGroupSubgroupsRequest, GetAllGroupSubgroupsResponse>
 {
     private readonly ISubgroupService _subgroupService;
-    private readonly IMapper _mapper;
+    private readonly IProductService _productService;
 
-    public GetAllGroupSubgroupsHandler(IMapper mapper, ISubgroupService subgroupService)
+    public GetAllGroupSubgroupsHandler(ISubgroupService subgroupService, IProductService productService)
     {
-        _mapper = mapper;
         _subgroupService = subgroupService;
+        _productService = productService;
     }
 
     public async Task<GetAllGroupSubgroupsResponse> Handle(GetAllGroupSubgroupsRequest request, CancellationToken cancellationToken)
@@ -25,7 +25,13 @@ public class GetAllGroupSubgroupsHandler : IRequestHandler<GetAllGroupSubgroupsR
         var response = new GetAllGroupSubgroupsResponse
         {
             Subgroups = subgroups
-                .Select(_mapper.Map<SubgroupCardModel>)
+                .Select(x => new SubgroupCardModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    SubgroupPhotoLink = x.SubgroupPhotoLink,
+                    ProductCount = _productService.GetAllProductsBySubgroupId(x.Id).Result.Count
+                })
                 .ToArray()
         };
 

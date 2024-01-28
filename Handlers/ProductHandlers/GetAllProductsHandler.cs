@@ -10,12 +10,12 @@ namespace net_shop_back.Handlers.ProductHandlers;
 public class GetAllProductsHandler : IRequestHandler<GetAllProductsRequest, GetAllProductsResponse>
 {
     private readonly IProductService _productService;
-    private readonly IMapper _mapper;
+    private readonly IPhotoService _photoService;
 
-    public GetAllProductsHandler(IProductService productService, IMapper mapper)
+    public GetAllProductsHandler(IProductService productService, IPhotoService photoService)
     {
         _productService = productService;
-        _mapper = mapper;
+        _photoService = photoService;
     }
 
     public async Task<GetAllProductsResponse> Handle(GetAllProductsRequest request, CancellationToken cancellationToken)
@@ -25,7 +25,22 @@ public class GetAllProductsHandler : IRequestHandler<GetAllProductsRequest, GetA
         var response = new GetAllProductsResponse
         {
             Products = products
-                .Select(_mapper.Map<ProductModel>)
+                .Select(x => new ProductModel
+                {
+                    Id = x.Id,
+                    SubgroupId = x.SubgroupId,
+                    Name = x.Name,
+                    Price = x.Price,
+                    ShortDescription = x.ShortDescription,
+                    IsAvailable = x.IsAvailable,
+                    Count = x.Count,
+                    Photos = _photoService.GetAllPhotosByProductIdAsync(x.Id).Result
+                        .Select(y => new PhotoForCardModel
+                        {
+                            Id = y.Id,
+                            Link = y.Link
+                        }).ToArray()
+                })
                 .ToArray()
         };
 

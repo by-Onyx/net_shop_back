@@ -9,4 +9,5 @@ public record ProductModel
     public required string ShortDescription { get; set; }
     public bool? IsAvailable { get; set; } = false;
     public int? Count { get; set; } = 0;
+    public required PhotoForCardModel[] Photos { get; set; }
 }
