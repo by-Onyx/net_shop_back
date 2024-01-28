@@ -11,12 +11,14 @@ namespace net_shop_back.Handlers.GroupHandlers
     public class GetAllGroupsHandler : IRequestHandler<GetAllGroupsRequest, GetAllGroupsResponse>
     {
         private readonly IGroupsService _groupsService;
+        private readonly ISubgroupService _subgroupService;
         private readonly IMapper _mapper;
 
-        public GetAllGroupsHandler(IGroupsService groupsService, IMapper mapper)
+        public GetAllGroupsHandler(IGroupsService groupsService, IMapper mapper, ISubgroupService subgroupService)
         {
             this._groupsService = groupsService;
             this._mapper = mapper;
+            _subgroupService = subgroupService;
         }
 
         public async Task<GetAllGroupsResponse> Handle(GetAllGroupsRequest request, CancellationToken cancellationToken)
@@ -26,8 +28,13 @@ namespace net_shop_back.Handlers.GroupHandlers
             var response = new GetAllGroupsResponse
             {
                 Groups = groups
-                    .Select(_mapper.Map<GroupModel>)
-                    .ToArray()
+                    .Select(x => new GroupModelWithCount
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        GroupPhotoLink = x.GroupPhotoLink,
+                        SubgroupCount =  _subgroupService.GetAllSubgroupsByGroupIdAsync(x.Id).Result.Count
+                    }).ToArray()
             };
 
             return response;

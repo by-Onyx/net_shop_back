@@ -21,6 +21,7 @@ namespace net_shop_back.Handlers.GroupHandlers
 
         public async Task<GetGroupResponse> Handle(GetGroupRequest request, CancellationToken cancellationToken)
         {
+            
             var group = await _groupsService.GetGroupByIdAsync(request.GroupId);
 
             NotFoundException.ThrowIfNull(group);

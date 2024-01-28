@@ -6,5 +6,4 @@ namespace net_shop_back.Responses.GroupResponse;
 public record GetAllGroupSubgroupsResponse
 {
     public required SubgroupCardModel[] Subgroups { get; set; }
-    public int Count  => Subgroups.Length;
 }

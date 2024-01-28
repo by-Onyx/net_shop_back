@@ -4,6 +4,6 @@ namespace net_shop_back.Responses.GroupResponse
 {
     public record GetAllGroupsResponse
     {
-        public required GroupModel[] Groups { get; set; }
+        public required GroupModelWithCount[] Groups { get; set; }
     }
 }
