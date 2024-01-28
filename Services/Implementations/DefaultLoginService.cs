@@ -21,8 +21,6 @@ public class DefaultLoginService : ILoginService
 
     public string Login(string login, string password)
     {
-        DotEnv.Load();
-        
         if (login != _config["Admin:Login"] ||
             password != _config["Admin:Password"])
         {

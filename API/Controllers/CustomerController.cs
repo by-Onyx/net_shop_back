@@ -7,7 +7,7 @@ using net_shop_back.Responses.CustomerResponse;
 
 namespace net_shop_back.API.Controllers;
 
-[ApiController]
+/*[ApiController]
 [Route("/constrspb/customer/")]
 [Produces(MediaTypeNames.Application.Json)]
 public class CustomerController : ControllerBase
@@ -72,4 +72,4 @@ public class CustomerController : ControllerBase
     [HttpDelete("{CustomerId:long}")]
     public Task<DeleteCustomerResponse> DeleteCustomer([FromRoute] DeleteCustomerRequest request)
         => _mediator.Send(request);
-}
+}*/

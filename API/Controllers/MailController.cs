@@ -6,7 +6,7 @@ using net_shop_back.Responses.MailResponses;
 
 namespace net_shop_back.API.Controllers;
 
-[ApiController]
+/*[ApiController]
 [Route("/constrspb/mail/")]
 [Produces(MediaTypeNames.Application.Json)]
 public class MailController : ControllerBase
@@ -26,4 +26,4 @@ public class MailController : ControllerBase
     [HttpPost("purchase")]
     public Task<SendMailAboutPurchaseResponse> SendPurchaseMail([FromBody] SendMailAboutPurchaseRequest request)
         => _mediator.Send(request);
-}
+}*/

@@ -8,6 +8,5 @@ public record SendMailAboutPurchaseRequest : IRequest<SendMailAboutPurchaseRespo
 {
     public required string Name { get; set; }
     public required string PhoneNumber { get; set; }
-    public string? Mail { get; set; }
     public required ProductMailModel[] Products { get; set; }
 }

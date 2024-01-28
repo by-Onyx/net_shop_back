@@ -16,7 +16,7 @@ public class SendMailAboutPurchaseHandler : IRequestHandler<SendMailAboutPurchas
 
     public async Task<SendMailAboutPurchaseResponse> Handle(SendMailAboutPurchaseRequest request, CancellationToken cancellationToken)
     {
-        await _mailService.SendMailAboutPurchaseAsync(request.Name, request.PhoneNumber, request.Mail, request.Products);
+        await _mailService.SendMailAboutPurchaseAsync(request.Name, request.PhoneNumber, request.Products);
 
         var response = new SendMailAboutPurchaseResponse();
 
