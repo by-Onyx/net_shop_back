@@ -4,5 +4,5 @@ namespace net_shop_back.Responses.SubgroupResponses;
 
 public record GetAllSubgroupsResponse
 {
-    public required SubgroupModel[] Subgroups { get; set; }
+    public required SubgroupModelWithCount[] Subgroups { get; set; }
 }

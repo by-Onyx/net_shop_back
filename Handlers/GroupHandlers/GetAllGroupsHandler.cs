@@ -12,12 +12,10 @@ namespace net_shop_back.Handlers.GroupHandlers
     {
         private readonly IGroupsService _groupsService;
         private readonly ISubgroupService _subgroupService;
-        private readonly IMapper _mapper;
 
-        public GetAllGroupsHandler(IGroupsService groupsService, IMapper mapper, ISubgroupService subgroupService)
+        public GetAllGroupsHandler(IGroupsService groupsService, ISubgroupService subgroupService)
         {
             this._groupsService = groupsService;
-            this._mapper = mapper;
             _subgroupService = subgroupService;
         }
 

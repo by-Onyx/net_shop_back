@@ -7,3 +7,12 @@ public record SubgroupModel
     public required string Name { get; set; }
     public required string SubgroupPhotoLink { get; set; }
 }
+
+public record SubgroupModelWithCount
+{
+    public required long Id { get; set; }
+    public required long GroupId { get; set; }
+    public required string Name { get; set; }
+    public required string SubgroupPhotoLink { get; set; }
+    public required long ProductCount { get; set; }
+}
