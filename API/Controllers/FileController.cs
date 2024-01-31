@@ -27,6 +27,7 @@ public class FileController : ControllerBase
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
+    [Authorize]
     [HttpPost]
     public Task<FileUploadResponse> UploadFile([FromForm] FileUploadRequest request)
         => _mediator.Send(request);
@@ -36,7 +37,6 @@ public class FileController : ControllerBase
     /// </summary>
     /// <param name="fileName"></param>
     /// <returns></returns>
-    [Authorize]
     [HttpGet("get/{fileName}")]
     public async Task<IActionResult> GetFile(string fileName)
     {
