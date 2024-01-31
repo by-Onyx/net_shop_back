@@ -29,8 +29,10 @@ public class GetAllProductsHandler : IRequestHandler<GetAllProductsRequest, GetA
                 {
                     Id = x.Id,
                     SubgroupId = x.SubgroupId,
+                    ManufacturerId = x.ManufacturerId,
                     Name = x.Name,
                     Price = x.Price,
+                    Priority = x.Priority,
                     ShortDescription = x.ShortDescription,
                     IsAvailable = x.IsAvailable,
                     Count = x.Count,

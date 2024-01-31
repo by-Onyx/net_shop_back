@@ -27,7 +27,9 @@ public class PostProductHandler : IRequestHandler<PostProductRequest, PostProduc
             request.Price,
             request.IsAvailable,
             request.Count,
-            request.ShortDescription);
+            request.ShortDescription,
+            request.Priority,
+            request.ManufacturerId);
 
         var response = new PostProductResponse
         {

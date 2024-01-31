@@ -79,4 +79,8 @@ public class ProductController : ControllerBase
     [HttpGet("{ProductId:long}/fullInfo")]
     public Task<GetFullProductInfoResponse> GetFullProductInfo([FromRoute] GetFullProductInfoRequest request)
         => _mediator.Send(request);
+    
+    [HttpPut("{ProductId:long}/changePriority/{Priority:int}")]
+    public Task<ChangeProductPriorityResponse> ChangeProductPriority([FromRoute]ChangeProductPriorityRequest request)
+        => _mediator.Send(request);
 }

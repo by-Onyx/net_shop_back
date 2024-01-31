@@ -35,9 +35,11 @@ public class PutProductHandler : IRequestHandler<PutProductRequest, PutProductRe
             SubgroupId = request.SubgroupId,
             Name = request.Name,
             Price = decimal.Round(request.Price,2),
+            Priority = request.Priority,
             ShortDescription = request.ShortDescription,
             IsAvailable = request.IsAvailable,
-            Count = request.Count
+            Count = request.Count,
+            ManufacturerId = request.ManufacturerId
         });
         
         NotFoundException.ThrowIfNull(product);
@@ -78,8 +80,10 @@ public class PutProductHandler : IRequestHandler<PutProductRequest, PutProductRe
             {
                 Id = product.Id,
                 SubgroupId = product.SubgroupId,
+                ManufacturerId = product.ManufacturerId,
                 Name = product.Name,
                 Price = product.Price,
+                Priority = product.Priority,
                 ShortDescription = product.ShortDescription!,
                 IsAvailable = product.IsAvailable!.Value,
                 Count = product.Count!.Value,

@@ -15,6 +15,7 @@ namespace net_shop_back.Mappers
             CreateMap<Product, ProductModel>();
             CreateMap<Product, ProductCardModel>();
             CreateMap<Photo, PhotoModel>();
+            CreateMap<Manufacturer, ManufacturerModel>();
             CreateMap<Photo, PhotoForCardModel>();
             CreateMap<ProductDescription, ProductDescriptionModel>();
             CreateMap<ProductDescription, DescriptionForCardModel>();

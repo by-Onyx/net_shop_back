@@ -13,12 +13,19 @@ namespace net_shop_back.Data.EntityConfigurations
             builder.HasOne(p => p.Subgroup)
                 .WithMany()
                 .HasForeignKey(p => p.SubgroupId);
+            
+            builder.HasOne(p => p.Manufacturer)
+                .WithMany()
+                .HasForeignKey(p => p.ManufacturerId);
 
             builder.Property(p => p.Name)
                 .HasMaxLength(255);
 
             builder.Property(p => p.ShortDescription)
                 .HasMaxLength(255);
+
+            builder.Property(p => p.Priority)
+                .HasDefaultValue(1);
         }
     }
 }

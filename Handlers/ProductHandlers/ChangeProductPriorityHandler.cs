@@ -8,28 +8,28 @@ using net_shop_back.Services.Core;
 
 namespace net_shop_back.Handlers.ProductHandlers;
 
-public class GetProductHandler : IRequestHandler<GetProductRequest, GetProductResponse>
+public class ChangeProductPriorityHandler : IRequestHandler<ChangeProductPriorityRequest, ChangeProductPriorityResponse>
 {
     private readonly IProductService _productService;
     private readonly IPhotoService _photoService;
     private readonly IMapper _mapper;
 
-    public GetProductHandler(IProductService productService, IMapper mapper, IPhotoService photoService)
+    public ChangeProductPriorityHandler(IProductService productService, IPhotoService photoService, IMapper mapper)
     {
         _productService = productService;
-        _mapper = mapper;
         _photoService = photoService;
+        _mapper = mapper;
     }
 
-    public async Task<GetProductResponse> Handle(GetProductRequest request, CancellationToken cancellationToken)
+    public async Task<ChangeProductPriorityResponse> Handle(ChangeProductPriorityRequest request, CancellationToken cancellationToken)
     {
-        var product = await _productService.GetProductByIdAsync(request.ProductId);
+        var product = await _productService.ChangeProductPriority(request.ProductId, request.Priority);
         
         NotFoundException.ThrowIfNull(product);
 
         var photos = await _photoService.GetAllPhotosByProductIdAsync(request.ProductId);
 
-        var response = new GetProductResponse
+        return new ChangeProductPriorityResponse
         {
             Product = new ProductModelWithPhoto
             {
@@ -45,7 +45,5 @@ public class GetProductHandler : IRequestHandler<GetProductRequest, GetProductRe
                 Photos = _mapper.Map<PhotoForCardModel[]>(photos),
             }
         };
-
-        return response;
     }
 }

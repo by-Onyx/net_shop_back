@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using net_shop_back.Requests.FileUploadRequests;
 using net_shop_back.Responses.FileUploadResponses;
@@ -30,6 +31,12 @@ public class FileController : ControllerBase
     public Task<FileUploadResponse> UploadFile([FromForm] FileUploadRequest request)
         => _mediator.Send(request);
     
+    /// <summary>
+    /// Получение файла по id
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    [Authorize]
     [HttpGet("get/{fileName}")]
     public async Task<IActionResult> GetFile(string fileName)
     {
@@ -62,6 +69,12 @@ public class FileController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Удаление файла
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    [Authorize]
     [HttpDelete("delete/{fileName}")]
     public async Task<IActionResult> DeleteFile(string fileName)
     {

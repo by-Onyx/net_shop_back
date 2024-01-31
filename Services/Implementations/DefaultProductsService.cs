@@ -24,7 +24,7 @@ public class DefaultProductsService : IProductService
     private Task CommitAsync() => _ctx.SaveChangesAsync();
 
     public async Task<Product> AddProductAsync(long subgroupId, string name, 
-        decimal price, bool? isAvailable, int? count, string shortDescription)
+        decimal price, bool? isAvailable, int? count, string shortDescription, int priority, long manufacturerId)
     {
         var product = new Product
         {
@@ -33,7 +33,9 @@ public class DefaultProductsService : IProductService
             Price = decimal.Round(price,2),
             IsAvailable = isAvailable,
             Count = count,
-            ShortDescription = shortDescription
+            ShortDescription = shortDescription,
+            Priority = priority,
+            ManufacturerId = manufacturerId
         };
         Products.Add(product);
         await CommitAsync();
@@ -54,7 +56,8 @@ public class DefaultProductsService : IProductService
     public async Task<IReadOnlyCollection<Product>> GetAllProductsAsync()
     {
         return await Products
-            .OrderBy(p => p.Id)
+            .OrderBy(p => p.Priority)
+            .ThenBy(p => p.Id)
             .Select(p => new Product
             {
                 Id = p.Id,
@@ -63,7 +66,9 @@ public class DefaultProductsService : IProductService
                 Price = p.Price,
                 ShortDescription = p.ShortDescription,
                 IsAvailable = p.IsAvailable,
-                Count = p.Count
+                Count = p.Count,
+                Priority = p.Priority,
+                ManufacturerId = p.ManufacturerId
             }).AsNoTracking()
             .ToArrayAsync();
     }
@@ -80,7 +85,9 @@ public class DefaultProductsService : IProductService
                 Price = p.Price,
                 ShortDescription = p.ShortDescription,
                 IsAvailable = p.IsAvailable,
-                Count = p.Count
+                Count = p.Count,
+                Priority = p.Priority,
+                ManufacturerId = p.ManufacturerId
             }).FirstOrDefaultAsync();
     }
 
@@ -94,6 +101,8 @@ public class DefaultProductsService : IProductService
     public async Task<IReadOnlyCollection<Product>> GetAllProductsBySubgroupId(long subgroupId)
     {
         return await Products
+            .OrderBy(p => p.Priority)
+            .ThenBy(p => p.Id)
             .Where(p => p.SubgroupId == subgroupId)
             .Select(p => new Product
             {
@@ -103,8 +112,23 @@ public class DefaultProductsService : IProductService
                 Price = p.Price,
                 ShortDescription = p.ShortDescription,
                 IsAvailable = p.IsAvailable,
-                Count = p.Count
+                Count = p.Count,
+                Priority = p.Priority,
+                ManufacturerId = p.ManufacturerId
             }).AsNoTracking()
             .ToArrayAsync();
+    }
+
+    public async Task<Product?> ChangeProductPriority(long id, int priority)
+    {
+        var product = await GetProductByIdAsync(id);
+
+        NotFoundException.ThrowIfNull(product);
+
+        product.Priority = priority;
+        var entity = Products.Update(product);
+        await CommitAsync();
+        
+        return entity.Entity;
     }
 }
