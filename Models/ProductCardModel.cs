@@ -9,5 +9,7 @@ public record ProductCardModel
     public required decimal Price { get; set; }
     public required bool IsAvailable { get; set; } = false;
     public required int Priority { get; set; }
+    public required int ManufacturerId { get; set; }
+    
     public required IReadOnlyCollection<PhotoForCardModel> Photos { get; set; }
 }
