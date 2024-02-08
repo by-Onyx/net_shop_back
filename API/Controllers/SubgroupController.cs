@@ -79,4 +79,14 @@ public class SubgroupController : ControllerBase
     [HttpGet("{SubgroupId:long}/products")]
     public Task<GetAllSubgroupProductsResponse> GetAllSubgroupProducts([FromRoute] GetAllSubgroupProductsRequest request)
         => _mediator.Send(request);
+    
+    /// <summary>
+    /// Получение всех товаров в подгруппе по Id подгруппы
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpGet("{SubgroupId:long}/productsWithoutManufacturer")]
+    public Task<GetAllSubgroupProductsWithoutManufacturerResponse> GetAllSubgroupProductsWithoutManufacturer(
+        [FromRoute] GetAllSubgroupProductsWithoutManufacturerRequest request)
+        => _mediator.Send(request);
 }
