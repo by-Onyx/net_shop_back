@@ -5,4 +5,5 @@ namespace net_shop_back.Services.Core;
 public interface IMailService
 {
     public Task SendMailAboutPurchaseAsync(string name, string phoneNumber, ProductMailModel[] products);
+    public Task SendMailAboutCallAsync(string phoneNumber);
 }
